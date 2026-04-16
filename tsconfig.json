@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "lib": ["esnext", "dom"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": false
+  },
+  "include": ["src", "test", "vite.config.js", "eslint.config.js"]
+}

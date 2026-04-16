@@ -1,6 +1,7 @@
 node_modules
 package-lock.json
+dist
 coverage
-*.tgz
 .DS_Store
-.codex
+*.log
+.vite

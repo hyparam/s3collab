@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>s3collab — collaborative markdown on S3</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>s3collab</h1>
+      <div id="room"></div>
+      <div id="status">connecting…</div>
+    </header>
+    <main>
+      <textarea id="editor" spellcheck="false" placeholder="# Start typing markdown…"></textarea>
+      <article id="preview"></article>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

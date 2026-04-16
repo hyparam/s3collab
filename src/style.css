@@ -1,0 +1,78 @@
+* { box-sizing: border-box }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: system-ui, sans-serif;
+  background: #fafafa;
+  color: #222;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+
+header h1 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+#room {
+  font-family: ui-monospace, monospace;
+  color: #555;
+}
+
+#status {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 0;
+}
+
+#editor {
+  border: 0;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  background: #fff;
+}
+
+#preview {
+  padding: 1rem 1.5rem;
+  overflow: auto;
+  line-height: 1.55;
+}
+
+#preview pre {
+  background: #f0f0f0;
+  padding: 0.75rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+#preview code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+}
+
+#preview h1, #preview h2, #preview h3 { margin-top: 1.2em }

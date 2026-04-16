@@ -1,0 +1,33 @@
+{
+  "name": "s3collab",
+  "version": "0.1.0",
+  "description": "Serverless collaborative markdown editor backed by S3 conditional writes",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage --coverage.include=src",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1030.0",
+    "@aws-sdk/credential-providers": "3.1030.0",
+    "marked": "18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "25.6.0",
+    "@vitest/coverage-v8": "4.1.4",
+    "eslint": "9.39.4",
+    "eslint-plugin-jsdoc": "62.9.0",
+    "globals": "17.5.0",
+    "typescript": "6.0.2",
+    "vite": "8.0.8",
+    "vitest": "4.1.4"
+  }
+}
