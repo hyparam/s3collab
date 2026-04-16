@@ -21,8 +21,7 @@ import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
  * @returns {Promise<AppConfig>}
  */
 export async function loadConfig() {
-  const base = /** @type {any} */ (import.meta).env?.BASE_URL ?? '/'
-  const res = await fetch(`${base}config.json`, { cache: 'no-store' })
+  const res = await fetch('config.json', { cache: 'no-store' })
   if (!res.ok) throw new Error(`config.json: ${res.status}`)
   return /** @type {AppConfig} */ (await res.json())
 }

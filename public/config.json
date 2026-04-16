@@ -1,6 +1,6 @@
 {
   "region": "us-east-1",
-  "identityPoolId": "us-east-1:REPLACE-WITH-YOUR-IDENTITY-POOL-ID",
-  "bucket": "REPLACE-WITH-YOUR-BUCKET",
+  "identityPoolId": "us-east-1:82f8010e-ad06-4013-b930-1fb8b90efa02",
+  "bucket": "hyperparam-s3collab",
   "prefix": "rooms/"
 }
