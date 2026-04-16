@@ -39,6 +39,8 @@ export class SyncEngine {
     this.text = ''
     this._pollTimer = null
     this._pushing = false
+    /** @type {Set<string>} op IDs not yet confirmed by S3 */
+    this._pendingIds = new Set()
   }
 
   /** Pull current log from S3 and apply. */
@@ -65,6 +67,7 @@ export class SyncEngine {
     const op = makeOp(this.text, nextText, this.localLamport, this.clientId)
     if (!op) return
     this.ops.push(op)
+    this._pendingIds.add(op.id)
     this.text = foldOps(this.ops)
     this.onText(this.text, 'local')
     await this._push(op)
@@ -84,6 +87,7 @@ export class SyncEngine {
         try {
           const etag = await putLog(this.client, this.config, this.roomKey, this.ops, this.etag)
           this.etag = etag
+          this._pendingIds.clear()
           this.onStatus('ready')
           return
         } catch (err) {
@@ -117,6 +121,7 @@ export class SyncEngine {
     const intended = this.text
     const remote = await getLog(this.client, this.config, this.roomKey)
     const filtered = remote.ops.filter(o => o.id !== failed.id)
+    this._pendingIds.delete(failed.id)
     this.ops = filtered
     this.etag = remote.etag
     const base = foldOps(this.ops)
@@ -133,6 +138,7 @@ export class SyncEngine {
       return null
     }
     this.ops.push(fresh)
+    this._pendingIds.add(fresh.id)
     this.text = foldOps(this.ops)
     this.onText(this.text, 'remote')
     return fresh
@@ -142,7 +148,10 @@ export class SyncEngine {
   async _pull() {
     const snap = await getLog(this.client, this.config, this.roomKey)
     if (snap.etag === this.etag && this.etag !== null) return
-    this.ops = snap.ops
+    const pending = this._pendingIds.size > 0
+      ? this.ops.filter(o => this._pendingIds.has(o.id))
+      : []
+    this.ops = snap.ops.concat(pending)
     this.etag = snap.etag
     const next = foldOps(this.ops)
     if (next !== this.text) {
