@@ -57,10 +57,7 @@ Attach this policy to the unauth role Cognito created. Replace `<bucket>` and `<
     {
       "Effect": "Allow",
       "Action": ["s3:PutObject"],
-      "Resource": "arn:aws:s3:::<bucket>/<prefix>*",
-      "Condition": {
-        "NumericLessThanEquals": { "s3:content-length-range": 1048576 }
-      }
+      "Resource": "arn:aws:s3:::<bucket>/<prefix>*"
     },
     {
       "Effect": "Allow",
