@@ -86,3 +86,7 @@ main {
 }
 
 #preview h1, #preview h2, #preview h3 { margin-top: 1.2em }
+
+#preview.demo {
+  opacity: 0.55;
+}

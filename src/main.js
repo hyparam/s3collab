@@ -29,6 +29,8 @@ async function main() {
   /** @type {(text: string) => void} */
   let setRemote = noop
 
+  renderPreview(previewEl, '')
+
   const engine = new SyncEngine({
     client,
     config,
