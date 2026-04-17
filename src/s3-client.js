@@ -2,6 +2,10 @@ import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 
 /**
+ * @import { Op } from './crdt.js'
+ */
+
+/**
  * @typedef {object} AppConfig
  * @property {string} region
  * @property {string} identityPoolId
@@ -11,7 +15,7 @@ import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 
 /**
  * @typedef {object} LogSnapshot
- * @property {import('./crdt.js').Op[]} ops
+ * @property {Op[]} ops
  * @property {string | null} etag
  */
 
@@ -82,7 +86,7 @@ export async function getLog(client, config, roomKey) {
  * @param {S3Client} client
  * @param {AppConfig} config
  * @param {string} roomKey
- * @param {import('./crdt.js').Op[]} ops
+ * @param {Op[]} ops
  * @param {string | null} etag
  * @returns {Promise<string>} new ETag
  */

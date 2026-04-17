@@ -2,6 +2,10 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { SyncEngine } from '../src/sync.js'
 
 /**
+ * @import { Op } from '../src/crdt.js'
+ */
+
+/**
  * @typedef {{ httpStatusCode: number }} Meta
  * @typedef {Error & { $metadata: Meta }} AwsError
  */
@@ -99,8 +103,17 @@ describe('SyncEngine', () => {
 
   it('retries with If-Match on a conflict', async () => {
     // Pre-populate with a remote op
-    /** @type {import('../src/crdt.js').Op} */
-    const remoteOp = { id: 'r1', lamport: 1, clientId: 'other', ts: 0, type: 'replace', from: 0, to: 0, text: 'REMOTE' }
+    /** @type {Op} */
+    const remoteOp = {
+      id: 'r1',
+      lamport: 1,
+      clientId: 'other',
+      ts: 0,
+      type: 'replace',
+      from: 0,
+      to: 0,
+      text: 'REMOTE',
+    }
     fake.store.set('b/rooms/a-b-c.json', {
       body: JSON.stringify({ version: 1, ops: [remoteOp] }),
       etag: '"seed"',
@@ -115,7 +128,16 @@ describe('SyncEngine', () => {
 
     // Simulate another writer pre-empting us: change the server object between
     // our last pull and our next PUT.
-    const remoteOp2 = { id: 'r2', lamport: 2, clientId: 'other', ts: 0, type: 'replace', from: 6, to: 6, text: '!' }
+    const remoteOp2 = {
+      id: 'r2',
+      lamport: 2,
+      clientId: 'other',
+      ts: 0,
+      type: 'replace',
+      from: 6,
+      to: 6,
+      text: '!',
+    }
     fake.store.set('b/rooms/a-b-c.json', {
       body: JSON.stringify({ version: 1, ops: [remoteOp, remoteOp2] }),
       etag: '"newer"',

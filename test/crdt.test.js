@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { bumpLamport, compareOps, diffReplace, foldOps, makeOp, maxLamport } from '../src/crdt.js'
 
+/**
+ * @import { Op } from '../src/crdt.js'
+ */
+
 describe('diffReplace', () => {
   it('returns null for identical strings', () => {
     expect(diffReplace('abc', 'abc')).toBe(null)
@@ -29,7 +33,7 @@ describe('diffReplace', () => {
 
 describe('foldOps', () => {
   it('applies ops in lamport order', () => {
-    /** @type {import('../src/crdt.js').Op[]} */
+    /** @type {Op[]} */
     const ops = [
       { id: '1', lamport: 1, clientId: 'a', ts: 0, type: 'replace', from: 0, to: 0, text: 'hello' },
       { id: '2', lamport: 2, clientId: 'a', ts: 0, type: 'replace', from: 5, to: 5, text: ' world' },
@@ -38,7 +42,7 @@ describe('foldOps', () => {
   })
 
   it('ignores op order in input', () => {
-    /** @type {import('../src/crdt.js').Op[]} */
+    /** @type {Op[]} */
     const ops = [
       { id: '2', lamport: 2, clientId: 'a', ts: 0, type: 'replace', from: 5, to: 5, text: ' world' },
       { id: '1', lamport: 1, clientId: 'a', ts: 0, type: 'replace', from: 0, to: 0, text: 'hello' },
@@ -47,7 +51,7 @@ describe('foldOps', () => {
   })
 
   it('breaks ties by clientId', () => {
-    /** @type {import('../src/crdt.js').Op[]} */
+    /** @type {Op[]} */
     const ops = [
       { id: '2', lamport: 1, clientId: 'b', ts: 0, type: 'replace', from: 0, to: 0, text: 'B' },
       { id: '1', lamport: 1, clientId: 'a', ts: 0, type: 'replace', from: 0, to: 0, text: 'A' },
@@ -85,7 +89,8 @@ describe('bumpLamport / maxLamport', () => {
 
 describe('compareOps', () => {
   it('orders by lamport then clientId', () => {
-    const a = { id: '1', lamport: 1, clientId: 'a', ts: 0, type: /** @type {const} */ ('replace'), from: 0, to: 0, text: '' }
+    /** @type {Op} */
+    const a = { id: '1', lamport: 1, clientId: 'a', ts: 0, type: 'replace', from: 0, to: 0, text: '' }
     const b = { ...a, id: '2', lamport: 2 }
     const c = { ...a, id: '3', clientId: 'b' }
     expect(compareOps(a, b)).toBeLessThan(0)

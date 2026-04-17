@@ -2,8 +2,9 @@ import { bumpLamport, foldOps, makeOp, maxLamport } from './crdt.js'
 import { getLog, isPreconditionFailure, putLog } from './s3-client.js'
 
 /**
- * @typedef {import('./crdt.js').Op} Op
- * @typedef {import('./s3-client.js').AppConfig} AppConfig
+ * @import { Op } from './crdt.js'
+ * @import { AppConfig } from './s3-client.js'
+ * @import { S3Client } from '@aws-sdk/client-s3'
  */
 
 const MAX_RETRIES = 5
@@ -17,7 +18,7 @@ const POLL_MS = 2000
 export class SyncEngine {
   /**
    * @param {object} args
-   * @param {import('@aws-sdk/client-s3').S3Client} args.client
+   * @param {S3Client} args.client
    * @param {AppConfig} args.config
    * @param {string} args.roomKey
    * @param {string} args.clientId

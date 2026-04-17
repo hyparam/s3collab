@@ -24,7 +24,7 @@ export function bindEditor(textarea, onLocal) {
     if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
       timer = null
-      const value = textarea.value
+      const { value } = textarea
       if (value === lastPushed) return
       lastPushed = value
       onLocal(value).catch(err => console.error(err))

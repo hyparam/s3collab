@@ -43,6 +43,16 @@ header h1 a:hover {
   color: #555;
 }
 
+#room a,
+#room a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+#room a:hover {
+  text-decoration: underline;
+}
+
 #status {
   margin-left: auto;
   font-size: 0.85rem;

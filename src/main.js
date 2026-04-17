@@ -16,11 +16,14 @@ async function main() {
     window.history.replaceState({}, '', url.toString())
   }
 
-  const roomEl = /** @type {HTMLElement} */ (document.getElementById('room'))
-  const statusEl = /** @type {HTMLElement} */ (document.getElementById('status'))
+  const roomEl = document.getElementById('room')
+  const statusEl = document.getElementById('status')
   const textarea = /** @type {HTMLTextAreaElement} */ (document.getElementById('editor'))
-  const previewEl = /** @type {HTMLElement} */ (document.getElementById('preview'))
-  roomEl.textContent = roomKey
+  const previewEl = document.getElementById('preview')
+  const roomLink = document.createElement('a')
+  roomLink.href = url.toString()
+  roomLink.textContent = roomKey
+  roomEl.replaceChildren(roomLink)
 
   const config = await loadConfig()
   const client = makeClient(config)
